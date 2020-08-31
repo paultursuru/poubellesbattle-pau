@@ -27,3 +27,15 @@ jobs:
       - checkout
       - *bundle_install
       - ruby/bundle-install
+  test:
+    <<: *defaults
+    parallelism: 3
+    steps:
+      - checkout
+      - *bundle_install
+      - ruby/bundle-install
+      run:
+          environment:
+            DATABASE_URL: "postgres://tps_test@localhost:5432/tps_test"
+          name: Create Database
+          command: bundle exec rake db:create db:schema:load db:migrate RAILS_ENV=test
