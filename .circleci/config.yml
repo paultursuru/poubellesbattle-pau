@@ -39,3 +39,12 @@ jobs:
             DATABASE_URL: "postgres://tps_test@localhost:5432/tps_test"
           name: Create Database
           command: bundle exec rake db:create db:schema:load db:migrate RAILS_ENV=test
+
+      - run:
+          environment:
+            DATABASE_URL: "postgres://tps_test@localhost:5432/tps_test"
+          name: Run Tests, Splitted by Timings
+          command: |
+            COMMAND="bundle exec rspec"
+            echo $COMMAND
+            eval $COMMAND
