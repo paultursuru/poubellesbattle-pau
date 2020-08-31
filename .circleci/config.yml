@@ -1,17 +1,29 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@0.1.2
+
+defaults: &defaults
+  working_directory: ~/tps
+  docker:
+      - image: circleci/ruby:2.6.3-stretch-node
+      - image: circleci/postgres:11.5
+      environment:
+        POSTGRES_USER: tps_test
+        POSTGRES_PASSWORD: tps_test
+        POSTGRES_DB: tps_test
+
+bundle_install: &bundle_install
+  run:
+    name: install dependencies
+    command: |
+      gem update --system
+      gem install bundler
+    - ruby/bundle-install
+
 
 jobs:
   build:
-    docker:
-      - image: circleci/ruby:2.6.3-stretch-node
-    executor: ruby/default
+    <<: *defaults
     steps:
       - checkout
-      - run:
-          name: install dependencies
-          command: |
-            gem update --system
-            gem install bundler
-      - ruby/bundle-install
+      - *bundle-install
