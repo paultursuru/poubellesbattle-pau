@@ -3,15 +3,17 @@ cache:
   bundler: true
   yarn: true
 services:
-  - postgresql
+  - redis-server
 sudo: required
 before_install:
 - sudo apt-get update
 - sudo apt-get install google-chrome-stable
 addons:
   postgresql: '11.5'
+before_script:
+  - psql -c 'create database PoubellesBattle_production;' -U postgres
 script:
   - bundle exec rake db:schema:load
   - bundle exec rake db:test:prepare
-  - SECRET_KEY_BASE=a RAILS_ENV=test bundle exec rake assets:precompile
+  - SECRET_KEY_BASE=a RAILS_ENV=production bundle exec rake assets:precompile
   - bundle exec rspec
