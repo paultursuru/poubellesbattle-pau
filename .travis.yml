@@ -4,15 +4,10 @@ rvm:
 cache:
   bundler: true
   yarn: true
-sudo: required
-before_install:
-- sudo apt-get update
-- sudo apt-get install google-chrome-stable
 addons:
   postgresql: 11.5
 before_script:
-  - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - psql -c 'create database PoubellesBattle_test;' -U postgres
 script:
   - bundle exec rails db:migrate RAILS_ENV=test
   - bundle exec rspec
