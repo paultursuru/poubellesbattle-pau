@@ -4,10 +4,12 @@ rvm:
 cache:
   bundler: true
   yarn: true
+services:
+  - postgresql
 addons:
-  postgresql: 11.5
+  postgresql: '11.5'
 before_script:
-  - psql -c 'create database PoubellesBattle_test;' -U postgres
+  - cp config/database.yml.travis config/database.yml
 script:
-  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rails db:reset db:setup db:migrate RAILS_ENV=test
   - bundle exec rspec
