@@ -27,13 +27,6 @@ jobs:
       - checkout
       - *bundle_install
       - ruby/bundle-install
-  test:
-    <<: *defaults
-    parallelism: 3
-    steps:
-      - checkout
-      - *bundle_install
-      - ruby/bundle-install
       - run:
           environment:
             DATABASE_URL: "postgres://tps_test@localhost:5432/tps_test"
@@ -43,7 +36,7 @@ jobs:
       - run:
           environment:
             DATABASE_URL: "postgres://tps_test@localhost:5432/tps_test"
-          name: Run Tests, Splitted by Timings
+          name: Run RSPEC
           command: |
             COMMAND="bundle exec rspec"
             echo $COMMAND
