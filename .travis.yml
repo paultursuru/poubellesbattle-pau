@@ -8,6 +8,9 @@ services:
   - postgresql
 addons:
   postgresql: '11.5'
+env:
+    global:
+      - PGPORT=5433
 before_script:
   - cp config/database.yml.travis config/database.yml
 script:
