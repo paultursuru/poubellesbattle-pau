@@ -3,7 +3,6 @@ cache:
   bundler: true
   yarn: true
 services:
-  - redis-server
   - postgresql
 sudo: required
 before_install:
@@ -12,10 +11,9 @@ before_install:
 addons:
   postgresql: '11.5'
 before_script:
-  - psql -c 'create database poubellesbattle_pau;' -U postgres
+  - psql -c 'create database PoubellesBattle_test;' -U postgres
 script:
   - bundle exec rake db:schema:load
   - bundle exec rake db:test:prepare
   - SECRET_KEY_BASE=a RAILS_ENV=production bundle exec rake assets:precompile
-  - bundle exec rake test
-  - bundle exec rake test:system
+  - bundle exec rspec
