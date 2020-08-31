@@ -4,6 +4,7 @@ cache:
   yarn: true
 services:
   - redis-server
+  - postgresql
 sudo: required
 before_install:
 - sudo apt-get update
