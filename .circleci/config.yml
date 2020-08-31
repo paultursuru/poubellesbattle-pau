@@ -19,6 +19,17 @@ bundle_install: &bundle_install
       gem update --system
       gem install bundler
 
+webpacker_precompile: &webpacker_precompile
+  run:
+    environment:
+      RAILS_ENV: test
+    name: Precompile Webpack assets
+    command: bin/webpack
+
+yarn_install: &yarn_install
+  run:
+    name: Install JS Dependencies
+    command: yarn install --frozen-lockfile --non-interactive || yarn install --frozen-lockfile --non-interactive
 
 jobs:
   build:
@@ -27,6 +38,8 @@ jobs:
       - checkout
       - *bundle_install
       - ruby/bundle-install
+      - *yarn_install
+      - *webpacker_precompile
       - run:
           environment:
             DATABASE_URL: "postgres://tps_test@localhost:5432/tps_test"
