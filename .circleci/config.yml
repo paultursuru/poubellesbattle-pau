@@ -25,5 +25,5 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - *bundle-install
+      - *bundle_install
       - ruby/bundle-install
