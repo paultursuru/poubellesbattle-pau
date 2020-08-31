@@ -40,6 +40,15 @@ jobs:
       - ruby/bundle-install
       - *yarn_install
       - *webpacker_precompile
+  test:
+    <<: *defaults
+    parallelism: 3
+    steps:
+      - checkout
+      - *bundle_install
+      - ruby/bundle-install
+      - *yarn_install
+      - *webpacker_precompile
       - run:
           environment:
             DATABASE_URL: "postgres://tps_test@localhost:5432/tps_test"
@@ -54,3 +63,12 @@ jobs:
             COMMAND="bundle exec rspec"
             echo $COMMAND
             eval $COMMAND
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
