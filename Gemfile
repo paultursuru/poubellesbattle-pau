@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby '2.6.3'
 
 gem 'bootsnap', require: false
+gem 'backup', '5.0.0.beta.1'
 gem 'cloudinary', '~> 1.12.0'
 gem 'devise'
 gem 'geocoder'
