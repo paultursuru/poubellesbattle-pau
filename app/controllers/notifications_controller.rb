@@ -29,8 +29,8 @@ class NotificationsController < ApplicationController
       redirect_to composteur_path(current_user.composteur, anchor: 'messagerie-board')
       if @notification.notification_type == 'signaler-contenu'
         flash[:notice] = 'Signalement pris en compte'
-        NotificationMailer.with(notification: @notification).signaler_contenu.deliver_now
-        NotificationMailer.with(notification: @notification).signaler_contenu_to_user.deliver_now
+        # NotificationMailer.with(notification: @notification).signaler_contenu.deliver_now
+        # NotificationMailer.with(notification: @notification).signaler_contenu_to_user.deliver_now
       end
     else
       redirect_to composteur_path(current_user.composteur)
@@ -84,7 +84,7 @@ class NotificationsController < ApplicationController
   def destroy
     @notification = Notification.find(params[:id])
     if @notification.notification_type == "demande-référent" || @notification.notification_type == "demande-référent-directe"
-      NotificationMailer.with(notification: @notification, state: "refusée").demande_referent_state.deliver_now
+      # NotificationMailer.with(notification: @notification, state: "refusée").demande_referent_state.deliver_now
     end
     @notification.destroy
     redirect_to composteur_path(@notification.composteur || @notification.user.composteur)

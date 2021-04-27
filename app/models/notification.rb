@@ -17,7 +17,7 @@ class Notification < ApplicationRecord
   validates :content, presence: true
   validates :notification_type, inclusion: { in: ['signaler-contenu', 'demande-référent', 'demande-référent-directe', 'depot', 'depot direct', 'anomalie', 'message', 'message-ref', 'message-admin'] }, presence: true
 
-  after_save :send_demande_referent_directe_email, if: :demande_directe?
+  # after_save :send_demande_referent_directe_email, if: :demande_directe?
 
   private
 
