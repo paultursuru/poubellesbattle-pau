@@ -136,11 +136,11 @@ ActiveRecord::Schema.define(version: 2020_09_09_095455) do
     t.string "first_name"
     t.string "last_name"
     t.string "phone_number"
+    t.string "access"
     t.bigint "composteur_id"
     t.boolean "ok_phone"
     t.boolean "ok_mail"
     t.boolean "ok_newsletter", default: false
-    t.string "access"
     t.integer "role", default: 0, null: false
     t.index ["composteur_id"], name: "index_users_on_composteur_id"
     t.index ["email"], name: "index_users_on_email", unique: true
