@@ -27,6 +27,8 @@ gem 'simplecov', require: false, group: :test
 gem 'uglifier'
 gem 'webpacker', '5.1.1'
 
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
+
 group :development do
   gem 'annotate'
   gem 'bullet'
